@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script>
+    function ajax(url, callback) {
+        // 1.创建ajax请求对象
+        var request = null
+        if (window.XMLHttpRequest) {
+            request = new XMLHttpRequest()
+        } else if (window.ActiveXObject) // ie5 ie6
+        {
+            request = new ActiveXObject('Microsoft.XMLHTTP')
+        } else {
+            alert('您的浏览器版本太低，不支持xlhttprequest')
+        }
+        console.log(request)
+
+        // 2. 打开操作
+        request.open('get', url, true) // true 异步  false 同步
+
+        // 3.绑定监听
+        request.onreadystatechange = function() {
+                if (request.readyState == 4) {
+                    if (request.status == '200') {
+                        callback(request.responseText)
+                    }
+                }
+            }
+            // 4.发送请求
+        request.send(true)
+    }
+    ajax('/api/user/login', function(data) {
+        console.log(data)
+    })
+</script>
+
+</html>

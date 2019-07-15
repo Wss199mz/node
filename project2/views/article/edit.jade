@@ -1,0 +1,41 @@
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="/components/bootstrap/dist/css/bootstrap.css")
+        script(src="/components/jquery/dist/jquery.js")
+        script.
+            function article_edit(){
+                var id = $("#id").val()
+                var title = $("#title").val()
+                var content = $("#content").val()
+                $.ajax({
+                    url: '/api/article/edit',
+                    type: 'post',
+                    data: {_id: id, title: title, content: content},
+                    success: function(data){
+                        alert(data.message)
+                    },
+                    error: function(){
+
+                    }
+                })
+                return false
+            } 
+        title 编辑文章
+    body.container
+        h1.text-center 编辑文章
+        form.form.horizontal(onsubmit=('return article_edit()'))
+            input(type="hidden",value="#{article._id}")#id
+            div.form-group
+                label.col-sm-3.control-label 标题
+                div.col-sm-12
+                    input(type="text", value="#{article.title}").form-control#title
+            div.form-group
+                label.col-sm-3.control-label 内容
+                div.col-sm-12
+                    textarea.form-control#content=article.content
+            div.form-group
+                div.col-sm-12.text-right
+                   input(type="submit").btn.btn-primary

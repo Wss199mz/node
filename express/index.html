@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function setCookie(days, cookieName, cookieValue) {
+            var date = new Date()
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)) // 获取当前时间
+            var time = 'time=' + date.toGMTString()
+            document.cookie = cookieName + "=" + cookieValue + ';' + time
+            console.log(document)
+        }
+        setCookie(1, '张三', '男')
+
+        function getCookie(cookieName) {
+            var name = cookieName + "="
+            var str = document.cookie.split(';')
+            for (var i = 0; i < str.length; i++) {
+                var a = str[i].trim() // 去除前后空格
+                if (str.indexOf(name) == 0) {
+                    return a.substring(name.length, a.length)
+                }
+            }
+            return 'false'
+        }
+        console.log(getCookie())
+    </script>
+</body>
+
+</html>

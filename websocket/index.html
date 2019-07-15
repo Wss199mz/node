@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket</title>
+</head>
+<body>
+    <input type="text" id="sendValue">
+    <button id="sendData">发送数据到服务端</button>
+    <div id="container"></div>
+<script>
+    var webSocket = new WebSocket("ws://localhost:3000/") // 创建一个websocket对象 webscoket是H5的api
+    webSocket.onopen = function () { // 打开连接
+        console.log('webSocket.onopen')
+        document.getElementById('container').innerHTML = 'websocket连接成功'
+    }
+    webSocket.onmessage = function (e) { // 接受服务端传来的数据
+        console.log(e)
+        document.getElementById('container').innerHTML = e.data
+    }
+    document.getElementById('sendData').onclick = function () {
+        var val = document.getElementById('sendValue').value
+        webSocket.send(val)
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+doctype html
+html
+    hede
+        title 这是一个jade模版
+    body
+        h1 这就是jade模版引擎
+        p #{username}
+        p #{age}
+        p #{nickName}
+        
+
+        - var num1 = 10 
+        - var num2 = 20
+        p #{num1 + num2}
+
+        //- - if (num1 > num2) 
+        //-     h2 num1 大于 num2
+        //- - else
+        //-     h2 num2 大于 num1
+
+        - var user = [ '范冰冰', '李冰冰', '王冰冰']
+        - for (var i = 0; i<user.length;i++){
+            p 第#{i+1}个是#{user[i]}
+        - }
+            
